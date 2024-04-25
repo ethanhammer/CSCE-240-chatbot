@@ -1,0 +1,12 @@
+hello
+Hello there
+Please enter a company name atleast
+whos is the ceo of restaurant rands int
+I understand, here is info on Item 10. Directors, Executive Officers and Corporate Governance:
+ Item 10. Directors, Executive Officers and Corporate Governance
+ The information required by this Item is incorporated herein by reference from the Company’s definitive proxy statement to be filed no later than 120 days after December 31, 2022. We refer to this proxy statement as the Definitive Proxy Statement.
+What do you wish to search?
+-clear
+bot= 8 userUtt= 3
+
+Time Taken: 31

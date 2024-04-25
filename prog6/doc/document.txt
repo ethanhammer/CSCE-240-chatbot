@@ -1,0 +1,163 @@
+William Ethan Hammer
+
+-------------------------
+To run:
+
+1. download project folder
+
+2. open project folder directory in terminal.
+
+3. navigate to src folder
+
+3. type "javac progFE.java progBE.java data.java statBE.java"
+
+4. type "java progFE"
+
+
+To close:
+
+Hit the X button at the top right
+-------------------------
+
+Code Reuse:
+
+Code was reused by Cody Miller and Jacob Stoll.
+
+I reused Cody Miller's code in order to better my regex searches for debug and information queries.
+
+------------------------
+Output location:
+
+	-Results are sent to both the Swing GUI and to an output file in the data subfolder. 
+	Logs are also stored in a sub-folder in data named chat-sessions. A chat-stats csv file is also
+	created in the data folder.
+	
+-------------------------
+Supported companies:
+
+	-Wendys and Restaurant Brands International (must enter words close to these for the file to be opened in inquiry).
+	
+	-If are both are included in the search, it defaults to Wendys.
+
+-------------------------
+More Information (Not printed to output or log files):
+
+To see supported companies you can ask what companies are supported or 
+
+to see available information you can ask what information do you have.
+    	    		
+        
+-------------------------
+How to See Previous Chat Sessions (Not printed to output or log files):
+
+This must be typed exactly:
+summary
+showchat-summary [num]
+showchat [num]
+
+
+-------------------------
+
+Supported keywords and related sections: (current threshold is set to 0.75, so 3/4 of the key has to be continuous in the user input)
+		
+		IF A SECTION IS FOUND BUT CONTAINS NO DATA NOTHING WILL BE PRINTED EXCEPT THE SECTION NAME
+		
+		IF MULTIPLE KEYS ARE FOUND IT DEFAULTS TO THE LONGER, MORE SPECIFIC KEY. IF KEYS ARE EQUAL THEN IT GOES IN ORDER OF THIS LIST.
+		
+		The last index of each row is the related section to the key words
+		
+					{"part 1", "part i", "Part I"},
+    	            {"risk", "dangers", "look out for", "factoring risk", "item 1a", "Item 1A. Risk Factors"},
+    	            {"staff", "workers", "employees", "item 1b", "Item 1B. Unresolved Staff Comments"},
+    	            {"business", "item 1", "Item 1. Business"},
+    	            {"property", "land", "locations", "how many restaurants", "Item 2. Properties"},
+    	            {"legal", "law", "item 3", "Item 3. Legal Proceedings"},
+    	            {"safety", "mine", "item 4", "disclosure", "Item 4. Mine Safety Disclosures"},
+    	            {"part 2", "part ii", "Part II"},
+    	            {"registrant", "item 5", "Item 5. Market for Registrant’s Common Equity, Related Stockholder Matters and Issuer Purchases of Equity Securities"},
+    	            {"reserved", "item 6", "Item 6. Reserved"},
+    	            {"discussion","analysis", "financial condition", "item 7", "operations", "Item 7. Management’s Discussion and Analysis of Financial Condition and Results of Operations"},
+    	            {"market risk", "quantitative", "qualitative", "item 7a", "Item 7A. Quantitative and Qualitative Disclosures About Market Risk"},
+    	            {"financial", "statements", "supplementary data", "item 8", "Item 8. Financial Statements and Supplementary Data"},
+    	            {"changes", "disagreements with accountants", "item 9", "Item 9. Changes in and Disagreements with Accountants on Accounting and Financial Disclosure"},
+    	            {"controls", "procedures", "item 9a", "Item 9A. Controls and Procedures"},
+    	            {"other", "item 9b", "Item 9B. Other Information"},
+    	            {"foreign", "inspections", "item 9c", "Item 9C. Disclosure Regarding Foreign Jurisdictions that Prevent Inspections"},
+    	            {"part 3", "part iii", "Part III"},
+    	            {"directors", "executives","ceo", "corporate", "item 10", "Item 10. Directors, Executive Officers and Corporate Governance"},
+    	            {"compensation", "item 11", "Item 11. Executive Compensation"},
+    	            {"ownership", "stockholder", "item 12", "Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Stockholder Matters"},
+    	            {"relationships", "transactions", "independence", "item 13", "Item 13. Certain Relationships and Related Transactions, and Director Independence"},
+    	            {"accounting fees", "services", "item 14", "Item 14. Principal Accounting Fees and Services"},
+    	            {"part 4", "part iv", "Part IV"},
+    	            {"exhibits", "schedules", "item 15", "Item 15. Exhibits and Financial Statement Schedules"},
+    	            {"summary", "generalize this", "item 16", "Item 16. Form 10-K Summary"},
+    	            {"all info", "everything", "all information"}
+    	            
+Supported small-talk. The final index of each array is the response:
+		
+		? = optional $ = end of line () = section
+		
+       {"(?:hello|hi|hey)", "Hello there" },
+       {"(?:how are you|are you good|are you good|hows it going)", "Good, thanks!" },
+       {"(?:thanks|thank you|you're welcome)", "you're welcome"}
+       
+       
+------------------------
+
+
+Write up:
+
+	The goal of this assignment was to create a functional chat feature with our given 10k's. 
+
+My companies were restaurant brands international (formerly McDonalds) and Wendys. The files from these companies are saved into the data folder of the program.
+
+The user input was judged based on how close they were to a series of keys and these keys were then searched for in the text.
+
+the corresponding section was then printed to both the GUI interface and the text document named output.txt.
+
+
+	The classes I created were called progFE, progBE, statBE, and data. The main method begins by creating the
+	
+ GUI interface and creates an instance of the back End class. The backend class also creates an instance of the statBE
+ 
+that then creates a .csv file with all of the previous recorded logs. The program then waits
+	
+for userInput, once that userInput is found, it records it and sends it to the back end to be tested. Three checks are then done. 
+
+The first checks if the user input contains any kind of small talk. If this happens the program answers. The seconds checks if the input
+
+contains a part of one of the company names. If it is found to, the file of that company's 10k is saved to the current file and the program continues.
+
+The second check compares the user input to a set of keys that the program is supposed to look for. These keys now are relatively simple and do not allow for too much freedom
+
+when talking to the bot. The program looks for common subsequences of letters between the input and all of the keys and 
+
+if the ratio of the length of the subsequence over the shorter string is greater than a specific threshold, then the key passes.
+
+If it finds a key inside the user's question, the program continues. If more than one key 
+
+is found then the program defaults to the longer key. Once just one key is found, the key is linked to a specific section in the file
+
+and the data object is created to look for that specific section, taking in the key's request as a parameter. The request can be a single item or a whole part, or the whole text.
+
+The data object has three strategies. If the request asks for the whole text, the object simply adds each line to it's private output variable. If it is an item,
+
+the data object searches until it sees the item name in the 10k document. Once it is found, the data adds each line to the output until it finds another line with the first word being item or part, signaling the end
+
+of the previous item. If it is a part, the data object finds the part name and then adds each line to the output until it finds a line with the first word part.
+
+After this, the object is created with its output variable initialized. The back end then calls for the data object to return the output and it is printed
+
+to both the console and file via the front end. The file also required the line spaces to be reformatted. The program then repeats if a new question is asked.
+
+However, it is also possible to view available commands, companies, and summaries if certain regex patterns pick it up from the userinput.
+
+This cancels the search feature and just those options are done. It does not print to the logs or output file.
+
+When the program is closed, the time the program began and end, along with how many times the bot and uer spoke are 
+
+recorded to the respective log file.
+
+
+	
