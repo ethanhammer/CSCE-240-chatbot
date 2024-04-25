@@ -1,6 +1,6 @@
 Code Written by Ethan Hammer.
 
-Reuse of code by Body Miller
+Reuse of code by Cody Miller
 
 CSCE-240-chatbot: gathers infromation based on Wendys and Food Brand International's SEC filed 10K files.
 Written for CSCE-240 at the University of South Carolina.
